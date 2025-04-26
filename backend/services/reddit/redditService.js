@@ -1,5 +1,5 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+import axios from 'axios';
+import cheerio from 'cheerio/lib/index.js';
 
 /**
  * Extrai dados de um subreddit do Reddit
@@ -7,7 +7,7 @@ const cheerio = require('cheerio');
  * @param {Object} options - Opções de extração
  * @returns {Promise<Object>} - Dados do subreddit e posts
  */
-const extrairDadosSubreddit = async (subredditUrl, options = {}) => {
+export const extrairDadosSubreddit = async (subredditUrl, options = {}) => {
   try {
     // Extrair nome do subreddit da URL
     let subredditName = '';
@@ -106,7 +106,7 @@ const extrairDadosSubreddit = async (subredditUrl, options = {}) => {
  * @param {string} postUrl - URL do post do Reddit
  * @returns {Promise<Object>} - Dados do post
  */
-const extrairDadosPost = async (postUrl) => {
+export const extrairDadosPost = async (postUrl) => {
   try {
     // Verificar se a URL é válida
     if (!postUrl.includes('/comments/')) {
@@ -161,7 +161,7 @@ const extrairDadosPost = async (postUrl) => {
   }
 };
 
-module.exports = {
+export default {
   extrairDadosSubreddit,
   extrairDadosPost
 };
