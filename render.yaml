@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: site-extracao-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: site-extracao-db
+          property: connectionString
+
+databases:
+  - name: site-extracao-db
+    databaseName: site_extracao
+    plan: free
