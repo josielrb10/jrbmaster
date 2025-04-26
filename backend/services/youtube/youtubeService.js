@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { google } from 'googleapis';
-import cheerio from 'cheerio/lib/index.js';
+const axios = require('axios');
+const { google } = require('googleapis');
 
 // Configuração da API do YouTube
 const youtube = google.youtube({
@@ -14,7 +13,7 @@ const youtube = google.youtube({
  * @param {Object} options - Opções de extração
  * @returns {Promise<Object>} - Dados do canal e vídeos
  */
-export const extrairDadosCanal = async (canalUrl, options = {}) => {
+const extrairDadosCanal = async (canalUrl, options = {}) => {
   try {
     // Extrair ID do canal da URL
     let canalId = '';
@@ -24,6 +23,7 @@ export const extrairDadosCanal = async (canalUrl, options = {}) => {
     } else if (canalUrl.includes('/c/') || canalUrl.includes('/@')) {
       // Para URLs com nome personalizado, primeiro precisamos obter o ID do canal
       const response = await axios.get(canalUrl);
+      const cheerio = require('cheerio');
       const $ = cheerio.load(response.data);
       const canonicalUrl = $('link[rel="canonical"]').attr('href');
       
@@ -123,7 +123,7 @@ export const extrairDadosCanal = async (canalUrl, options = {}) => {
  * @param {string} videoUrl - URL do vídeo do YouTube
  * @returns {Promise<Object>} - Dados do vídeo
  */
-export const extrairDadosVideo = async (videoUrl) => {
+const extrairDadosVideo = async (videoUrl) => {
   try {
     // Extrair ID do vídeo da URL
     let videoId = '';
@@ -179,7 +179,7 @@ export const extrairDadosVideo = async (videoUrl) => {
   }
 };
 
-export default {
+module.exports = {
   extrairDadosCanal,
   extrairDadosVideo
 };
