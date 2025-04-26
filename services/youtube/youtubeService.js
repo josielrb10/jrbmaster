@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { google } from 'googleapis';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 
 // Configuração da API do YouTube
 const youtube = google.youtube({
