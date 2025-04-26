@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { google } = require('googleapis');
+const cheerio = require('cheerio');
 
 // Configuração da API do YouTube
 const youtube = google.youtube({
@@ -23,7 +24,6 @@ const extrairDadosCanal = async (canalUrl, options = {}) => {
     } else if (canalUrl.includes('/c/') || canalUrl.includes('/@')) {
       // Para URLs com nome personalizado, primeiro precisamos obter o ID do canal
       const response = await axios.get(canalUrl);
-      const cheerio = require('cheerio');
       const $ = cheerio.load(response.data);
       const canonicalUrl = $('link[rel="canonical"]').attr('href');
       
